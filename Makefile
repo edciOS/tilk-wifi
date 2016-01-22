@@ -65,7 +65,8 @@ CONFIG_AP_WOWLAN = n
 ######### Notify SDIO Host Keep Power During Syspend ##########
 CONFIG_RTW_SDIO_PM_KEEP_POWER = y
 ###################### Platform Related #######################
-CONFIG_PLATFORM_I386_PC = y
+CONFIG_PLATFORM_I386_PC =n 
+CONFIG_PLATFORM_SMART210 = y
 CONFIG_PLATFORM_ANDROID_X86 = n
 CONFIG_PLATFORM_JB_X86 = n
 CONFIG_PLATFORM_ARM_S3C2K4 = n
@@ -872,6 +873,15 @@ ARCH := arm
 CROSS_COMPILE := arm-none-linux-gnueabi-
 KVER  := 2.6.34.1
 KSRC ?= /usr/src/linux-2.6.34.1
+endif
+
+ifeq ($(CONFIG_PLATFORM_SMART210), y)
+EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ARCH := arm
+CROSS_COMPILE := arm-linux-
+KVER  := 2.6.35.7
+KSRC ?= /opt/FriendlyARM/smart210/linux-2.6.35.7/
+MODULE_NAME := wlan
 endif
 
 ifeq ($(CONFIG_PLATFORM_RTD2880B), y)
